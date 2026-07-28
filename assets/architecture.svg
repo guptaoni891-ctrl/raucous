@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="420" viewBox="0 0 1100 420" role="img" aria-label="VinylPulse cross-platform architecture diagram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#10162b"/><stop offset="1" stop-color="#080b14"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0l12 6-12 6z" fill="#8ea0ff"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="420" rx="24" fill="url(#bg)"/>
+  <g font-family="Inter,Segoe UI,sans-serif">
+    <g fill="#17213d" stroke="#6478d8" stroke-width="2">
+      <rect x="55" y="70" width="210" height="90" rx="16"/>
+      <rect x="55" y="260" width="210" height="90" rx="16"/>
+      <rect x="345" y="70" width="220" height="90" rx="16"/>
+      <rect x="345" y="260" width="220" height="90" rx="16"/>
+      <rect x="650" y="150" width="190" height="120" rx="18" fill="#202b4d"/>
+      <rect x="915" y="165" width="135" height="90" rx="45" fill="#11141d"/>
+    </g>
+    <g fill="#f5f7ff" text-anchor="middle">
+      <text x="160" y="108" font-size="20" font-weight="700">Spotify Web API</text>
+      <text x="160" y="136" font-size="14" fill="#b9c4ef">metadata + artwork URL</text>
+      <text x="160" y="294" font-size="20" font-weight="700">OS Audio</text>
+      <text x="160" y="320" font-size="13" fill="#b9c4ef">WASAPI • CoreAudio</text>
+      <text x="160" y="339" font-size="13" fill="#b9c4ef">PipeWire • PortAudio</text>
+      <text x="455" y="108" font-size="20" font-weight="700">SpotifyWorker</text>
+      <text x="455" y="136" font-size="14" fill="#b9c4ef">PKCE • polling • retry</text>
+      <text x="455" y="298" font-size="20" font-weight="700">AudioWorker</text>
+      <text x="455" y="326" font-size="14" fill="#b9c4ef">capture • FFT • bands</text>
+      <text x="745" y="196" font-size="21" font-weight="700">VinylWidget</text>
+      <text x="745" y="225" font-size="14" fill="#b9c4ef">state + animation</text>
+      <text x="745" y="247" font-size="14" fill="#b9c4ef">main Qt thread</text>
+      <text x="982" y="207" font-size="18" font-weight="700">QPainter</text>
+      <text x="982" y="231" font-size="13" fill="#b9c4ef">rendering</text>
+    </g>
+    <g stroke="#8ea0ff" stroke-width="3" fill="none" marker-end="url(#arrow)">
+      <path d="M265 115h72"/>
+      <path d="M265 305h72"/>
+      <path d="M565 115c55 0 40 82 77 82"/>
+      <path d="M565 305c55 0 40-78 77-78"/>
+      <path d="M840 210h65"/>
+    </g>
+  </g>
+</svg>

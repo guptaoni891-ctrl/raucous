@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="VinylPulse desktop widget preview">
+  <defs>
+    <radialGradient id="bg" cx="48%" cy="42%" r="72%">
+      <stop offset="0" stop-color="#222b56"/>
+      <stop offset="0.55" stop-color="#11162d"/>
+      <stop offset="1" stop-color="#080b16"/>
+    </radialGradient>
+    <radialGradient id="glow">
+      <stop offset="0.68" stop-color="#7cf5ff" stop-opacity="0"/>
+      <stop offset="0.9" stop-color="#7cf5ff" stop-opacity="0.23"/>
+      <stop offset="1" stop-color="#8b8cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cover" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7cf5ff"/>
+      <stop offset="0.42" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#191d38"/>
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="600" cy="337" r="235" fill="#75eaff" opacity="0.12" filter="url(#shadow)"/>
+  <circle cx="600" cy="337" r="228" fill="url(#glow)"/>
+  <g stroke-linecap="round">
+    <g stroke="#7cf5ff" opacity="0.2" stroke-width="10">
+      <path d="M600 94v37M702 116l-16 34M787 179l-29 24M835 269l-36 9M842 371l-37-5M806 467l-32-20M731 539l-20-31M634 574l-5-37M531 568l10-36M437 522l24-29M369 443l34-16M340 344l38-1M356 243l36 11M414 157l30 23M503 107l18 33"/>
+    </g>
+    <g stroke="#9ca4ff" stroke-width="4">
+      <path d="M600 94v26M702 116l-11 24M787 179l-21 17M835 269l-27 7M842 371l-28-4M806 467l-23-15M731 539l-15-23M634 574l-4-27M531 568l8-26M437 522l18-22M369 443l25-12M340 344l28-1M356 243l26 8M414 157l22 17M503 107l13 24"/>
+    </g>
+  </g>
+  <circle cx="600" cy="337" r="162" fill="#0c0e13" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.10">
+    <circle cx="600" cy="337" r="146"/><circle cx="600" cy="337" r="132"/><circle cx="600" cy="337" r="117"/><circle cx="600" cy="337" r="102"/>
+  </g>
+  <rect x="527" y="264" width="146" height="146" fill="url(#cover)"/>
+  <path d="M527 305l146 105M527 350l85 60M572 264l101 73" stroke="#fff" stroke-opacity="0.18" stroke-width="5"/>
+  <text x="600" y="391" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="18" font-weight="700" text-anchor="middle">VINYLPULSE</text>
+  <text x="600" y="622" fill="#fff" font-family="Inter,Segoe UI,sans-serif" font-size="28" font-weight="700" text-anchor="middle">Midnight Compile — VinylPulse Demo</text>
+  <text x="600" y="650" fill="#cdd5ff" font-family="Inter,Segoe UI,sans-serif" font-size="16" text-anchor="middle">PyQt6 • Spotify PKCE • Real-time FFT</text>
+</svg>

@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible VinylPulse problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please remove credentials and OAuth tokens from all logs.
+  - type: input
+    id: version
+    attributes:
+      label: VinylPulse version
+      placeholder: 1.1.0
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Operating system and desktop environment
+      placeholder: Windows/macOS/Linux version, desktop environment and audio setup
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      render: shell

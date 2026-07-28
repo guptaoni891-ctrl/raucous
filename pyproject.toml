@@ -1,0 +1,105 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vinylpulse"
+version = "1.1.0"
+description = "A cross-platform Spotify now-playing vinyl widget with a live circular audio visualizer."
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Anubhav Gupta" },
+]
+keywords = [
+  "spotify",
+  "pyqt6",
+  "windows",
+  "macos",
+  "linux",
+  "wayland",
+  "wasapi",
+  "coreaudio",
+  "pipewire",
+  "audio-visualizer",
+  "python",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: End Users/Desktop",
+  "Operating System :: Microsoft :: Windows :: Windows 10",
+  "Operating System :: Microsoft :: Windows :: Windows 11",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Multimedia :: Graphics :: Presentation",
+]
+dependencies = [
+  "numpy>=2.0,<3",
+  "platformdirs>=4.3,<5",
+  "PyQt6>=6.8,<7",
+  "python-dotenv>=1.0,<2",
+  "requests>=2.32,<3",
+  "SoundCard>=0.4.4,<0.5",
+  "sounddevice>=0.5,<0.6",
+  "spotipy>=2.26,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2,<2",
+  "mypy>=1.15,<2",
+  "pyinstaller>=6.14,<7",
+  "pytest>=8.3,<10",
+  "ruff>=0.15.22,<0.16",
+  "types-requests>=2.32",
+]
+
+[project.scripts]
+vinylpulse = "vinylpulse.app:main"
+
+[project.urls]
+Homepage = "https://github.com/guptaoni891-ctrl/vinylpulse"
+Repository = "https://github.com/guptaoni891-ctrl/vinylpulse"
+Issues = "https://github.com/guptaoni891-ctrl/vinylpulse/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+vinylpulse = ["assets/*.png"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "BLE", "UP", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+check_untyped_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["numpy.*", "platformdirs.*", "dotenv.*", "soundcard.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"

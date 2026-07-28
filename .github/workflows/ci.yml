@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+
+    env:
+      QT_QPA_PLATFORM: offscreen
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install Linux libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libegl1 libgl1 libpulse0 libportaudio2
+
+      - name: Install project
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Ruff lint
+        run: ruff check src tests
+
+      - name: Ruff formatting
+        run: ruff format --check src tests
+
+      - name: Type check pure modules
+        run: >-
+          mypy
+          src/vinylpulse/config.py
+          src/vinylpulse/pulse_audio.py
+          src/vinylpulse/soundcard_audio.py
+          src/vinylpulse/spectrum.py
+          src/vinylpulse/spotify_parser.py
+
+      - name: Unit tests
+        run: pytest
+
+      - name: Build Python distributions
+        run: python -m build
+
+  platform-smoke:
+    name: Smoke test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-15]
+
+    env:
+      QT_QPA_PLATFORM: offscreen
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install project
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: Run unit tests
+        run: python -m pytest
+      - name: Import application modules
+        run: python -c "import vinylpulse.app, vinylpulse.audio_worker, vinylpulse.soundcard_audio"

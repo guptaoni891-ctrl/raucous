@@ -1,0 +1,143 @@
+name: Build release downloads
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: ${{ matrix.artifact }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: VinylPulse-Windows-x64
+            kind: windows
+          - os: ubuntu-22.04
+            artifact: VinylPulse-Linux-x64
+            kind: linux
+          - os: macos-15
+            artifact: VinylPulse-macOS-Apple-Silicon
+            kind: mac-arm
+          - os: macos-15-intel
+            artifact: VinylPulse-macOS-Intel
+            kind: mac-intel
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Linux runtime libraries
+        if: matrix.kind == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libegl1 libgl1 libpulse0 libportaudio2
+
+      - name: Install project and bundler
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Run tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m pytest
+
+      - name: Build native application
+        run: pyinstaller --noconfirm --clean vinylpulse.spec
+
+      - name: Smoke-test Windows bundle
+        if: matrix.kind == 'windows'
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: '& "dist/VinylPulse/VinylPulse.exe" --smoke-test'
+
+      - name: Smoke-test Linux bundle
+        if: matrix.kind == 'linux'
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: dist/VinylPulse/VinylPulse --smoke-test
+
+      - name: Smoke-test macOS bundle
+        if: startsWith(matrix.kind, 'mac-')
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: dist/VinylPulse.app/Contents/MacOS/VinylPulse --smoke-test
+
+      - name: Package Windows download
+        if: matrix.kind == 'windows'
+        shell: pwsh
+        run: |
+          Copy-Item LICENSE, NOTICE, README.md -Destination dist/VinylPulse
+          Compress-Archive -Path dist/VinylPulse/* -DestinationPath "${{ matrix.artifact }}.zip"
+
+      - name: Package Linux download
+        if: matrix.kind == 'linux'
+        run: |
+          cp LICENSE NOTICE README.md dist/VinylPulse/
+          tar -C dist -czf "${{ matrix.artifact }}.tar.gz" VinylPulse
+
+      - name: Package macOS download
+        if: startsWith(matrix.kind, 'mac-')
+        run: |
+          mkdir release-package
+          cp -R dist/VinylPulse.app release-package/
+          cp LICENSE NOTICE README.md release-package/
+          ditto -c -k --sequesterRsrc release-package "${{ matrix.artifact }}.zip"
+
+      - name: Upload Windows artifact
+        if: matrix.kind == 'windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.artifact }}.zip
+
+      - name: Upload Linux artifact
+        if: matrix.kind == 'linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.artifact }}.tar.gz
+
+      - name: Upload macOS artifact
+        if: startsWith(matrix.kind, 'mac-')
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.artifact }}.zip
+
+  publish:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-downloads
+          merge-multiple: true
+
+      - name: Generate checksums
+        run: |
+          cd release-downloads
+          sha256sum VinylPulse-* > SHA256SUMS.txt
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1 || \
+            gh release create "${GITHUB_REF_NAME}" --generate-notes --title "VinylPulse ${GITHUB_REF_NAME#v}"
+          gh release upload "${GITHUB_REF_NAME}" release-downloads/* --clobber

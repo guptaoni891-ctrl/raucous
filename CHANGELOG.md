@@ -1,39 +1,28 @@
 # Changelog
 
-All notable changes to VinylPulse are documented here.
+All notable changes to Raucous are documented here.
 
-## [1.1.0] - 2026-07-28
-
-### Added
-
-- cross-platform native audio selection through SoundCard
-- Windows WASAPI output-loopback support
-- macOS CoreAudio/virtual-loopback device support
-- first-launch Spotify Client ID setup with Demo Mode fallback
-- separate Windows, Linux, Apple Silicon macOS and Intel macOS release builds
-- PyInstaller specification and tagged GitHub Release workflow
-- Windows, macOS and general Linux setup guides
-- cross-platform CI smoke tests
-- in-app audio backend and device settings for downloaded builds
-- native Windows and macOS application icons
-- release archive checksums and bundled license notices
+## [1.2.0] - 2026-07-28
 
 ### Changed
 
-- Linux automatic audio fallback is now PipeWire → SoundCard → PortAudio
-- repository metadata and README now advertise Windows, macOS and Linux
-- audio device listing now shows native, PipeWire and PortAudio devices
-
-## [1.0.0] - 2026-07-28
+- rebranded the application, Python package, CLI command and release artifacts as Raucous
+- updated desktop identifiers, application metadata, documentation and GitHub workflows
+- renamed native Windows, macOS and Linux bundles to use the Raucous brand
 
 ### Added
 
-- Spotify PKCE authentication and playback polling
-- current track and podcast episode artwork
-- custom PyQt6 vinyl rendering and circular FFT visualizer
+- Spotify Authorization Code with PKCE authentication
+- current track and podcast episode metadata polling
+- asynchronous album-art retrieval with retry and rate-limit handling
 - native PipeWire-Pulse output-monitor capture on Arch Linux
-- PortAudio fallback device discovery
-- persisted window position and UI preferences
+- Windows WASAPI and macOS CoreAudio-compatible capture support
+- PortAudio fallback and real-time FFT visualizer
+- automatic loopback/monitor source discovery
 - native Qt Wayland startup with XWayland fallback
-- demo mode, structured logs and validated configuration
-- unit tests, packaging metadata and GitHub Actions CI
+- dynamic album-derived visualizer colour
+- draggable frameless PyQt6 widget
+- persisted window position and menu preferences
+- demo mode for reviewers
+- validated JSON configuration and `.env` support
+- rotating logs, unit tests, packaging and CI

@@ -13,10 +13,10 @@ from spotipy.cache_handler import CacheFileHandler
 from spotipy.exceptions import SpotifyException
 from spotipy.oauth2 import SpotifyPKCE
 
-from vinylpulse import __version__
-from vinylpulse.config import APP_AUTHOR, APP_NAME, AppConfig
-from vinylpulse.models import TrackUpdate
-from vinylpulse.spotify_parser import ParsedPlayback, parse_playback
+from raucous import __version__
+from raucous.config import APP_AUTHOR, APP_NAME, AppConfig
+from raucous.models import TrackUpdate
+from raucous.spotify_parser import ParsedPlayback, parse_playback
 
 logger = logging.getLogger(__name__)
 
@@ -110,7 +110,7 @@ class SpotifyWorker(QThread):
             return
 
         session = requests.Session()
-        session.headers["User-Agent"] = f"VinylPulse/{__version__}"
+        session.headers["User-Agent"] = f"Raucous/{__version__}"
         backoff = 2.0
 
         while not self._stop_event.is_set() and not self.isInterruptionRequested():

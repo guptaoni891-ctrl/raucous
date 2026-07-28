@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from vinylpulse.spectrum import calculate_spectrum, smooth_levels
+from raucous.spectrum import calculate_spectrum, smooth_levels
 
 
 def test_silence_returns_zero_levels() -> None:

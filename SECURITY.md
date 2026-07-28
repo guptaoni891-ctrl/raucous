@@ -7,5 +7,5 @@ Include affected versions, reproduction steps and the expected impact.
 
 ## Credential handling
 
-VinylPulse uses Spotify PKCE and does not require a client secret. Never commit
+Raucous uses Spotify PKCE and does not require a client secret. Never commit
 OAuth cache files, `.env` files or access/refresh tokens.

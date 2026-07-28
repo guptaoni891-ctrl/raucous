@@ -3,8 +3,8 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "vinylpulse"
-version = "1.1.0"
+name = "raucous"
+version = "1.2.0"
 description = "A cross-platform Spotify now-playing vinyl widget with a live circular audio visualizer."
 readme = "README.md"
 requires-python = ">=3.11,<3.15"
@@ -62,18 +62,18 @@ dev = [
 ]
 
 [project.scripts]
-vinylpulse = "vinylpulse.app:main"
+raucous = "raucous.app:main"
 
 [project.urls]
-Homepage = "https://github.com/guptaoni891-ctrl/vinylpulse"
-Repository = "https://github.com/guptaoni891-ctrl/vinylpulse"
-Issues = "https://github.com/guptaoni891-ctrl/vinylpulse/issues"
+Homepage = "https://github.com/guptaoni891-ctrl/raucous"
+Repository = "https://github.com/guptaoni891-ctrl/raucous"
+Issues = "https://github.com/guptaoni891-ctrl/raucous/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-vinylpulse = ["assets/*.png"]
+raucous = ["assets/*.png"]
 
 [tool.ruff]
 target-version = "py311"

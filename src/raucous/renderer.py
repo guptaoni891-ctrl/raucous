@@ -13,8 +13,8 @@ from PyQt6.QtGui import (
     QRadialGradient,
 )
 
-from vinylpulse.config import AppConfig
-from vinylpulse.geometry import radial_bar_segment
+from raucous.config import AppConfig
+from raucous.geometry import radial_bar_segment
 
 DEFAULT_ACCENT = QColor(225, 232, 255)
 
@@ -56,7 +56,7 @@ def create_demo_artwork(size: int = 640) -> QPixmap:
     painter.drawText(
         image.rect().adjusted(size // 12, 0, -size // 12, -size // 8),
         Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom,
-        "VINYLPULSE",
+        "RAUCOUS",
     )
     painter.end()
     return QPixmap.fromImage(image)

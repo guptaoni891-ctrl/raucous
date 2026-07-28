@@ -9,9 +9,9 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
-from vinylpulse import __version__
-from vinylpulse.audio_devices import list_input_devices
-from vinylpulse.config import (
+from raucous import __version__
+from raucous.audio_devices import list_input_devices
+from raucous.config import (
     APP_AUTHOR,
     APP_NAME,
     AppConfig,
@@ -21,20 +21,20 @@ from vinylpulse.config import (
     save_config,
     write_default_config,
 )
-from vinylpulse.logging_config import configure_logging
-from vinylpulse.pulse_audio import (
+from raucous.logging_config import configure_logging
+from raucous.pulse_audio import (
     PulseAudioError,
     list_pulse_sources,
     pulse_tools_available,
 )
-from vinylpulse.soundcard_audio import SoundCardError, list_soundcard_devices
+from raucous.soundcard_audio import SoundCardError, list_soundcard_devices
 
 logger = logging.getLogger(__name__)
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="vinylpulse",
+        prog="raucous",
         description="Spotify now-playing vinyl widget and circular audio visualizer.",
     )
     parser.add_argument("--version", action="version", version=__version__)
@@ -155,8 +155,8 @@ def _install_exception_hook(message_box: object) -> None:
         critical = getattr(message_box, "critical")
         critical(
             None,
-            "VinylPulse error",
-            "VinylPulse encountered an unexpected error. Check the log file for "
+            "Raucous error",
+            "Raucous encountered an unexpected error. Check the log file for "
             "details.",
         )
 
@@ -175,9 +175,9 @@ def _first_run_setup(
         return config
 
     dialog = message_box()
-    dialog.setWindowTitle("Set up VinylPulse")
+    dialog.setWindowTitle("Set up Raucous")
     dialog.setIcon(message_box.Icon.Information)
-    dialog.setText("VinylPulse needs a Spotify application Client ID.")
+    dialog.setText("Raucous needs a Spotify application Client ID.")
     dialog.setInformativeText(
         "Create an app in the Spotify Developer Dashboard, add "
         "http://127.0.0.1:8888/callback as its redirect URI, then enter the "
@@ -217,7 +217,7 @@ def _first_run_setup(
                 message_box.warning(
                     None,
                     "Could not save configuration",
-                    f"VinylPulse will continue for this session only.\n\n{exc}",
+                    f"Raucous will continue for this session only.\n\n{exc}",
                 )
             return configured
         message_box.warning(
@@ -256,7 +256,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 2
 
     log_path = configure_logging(debug=config.debug)
-    logger.info("Starting VinylPulse %s", __version__)
+    logger.info("Starting Raucous %s", __version__)
     logger.info("Log file: %s", log_path)
 
     _configure_qt_platform()
@@ -275,7 +275,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     QCoreApplication.setApplicationName(APP_NAME)
     QCoreApplication.setOrganizationName(APP_AUTHOR)
-    QGuiApplication.setDesktopFileName("vinylpulse")
+    QGuiApplication.setDesktopFileName("raucous")
     QApplication.setHighDpiScaleFactorRoundingPolicy(
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
     )
@@ -295,7 +295,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if config is None:
         return 0
 
-    from vinylpulse.widget import VinylWidget
+    from raucous.widget import VinylWidget
 
     widget = VinylWidget(config, config_path=args.config)
     widget.show()

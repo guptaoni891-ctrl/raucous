@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for improving VinylPulse.
+Thanks for improving Raucous.
 
 1. Fork the repository and create a focused branch.
 2. Install development dependencies with `python -m pip install -e ".[dev]"`.

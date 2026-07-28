@@ -100,7 +100,7 @@ def choose_audio_device(
 
     raise AudioDeviceError(
         "No monitor/loopback input was detected. Run "
-        "'vinylpulse --list-audio-devices' and set audio_device in config.json."
+        "'raucous --list-audio-devices' and set audio_device in config.json."
     )
 
 

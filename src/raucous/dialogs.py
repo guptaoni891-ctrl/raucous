@@ -14,7 +14,7 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-from vinylpulse.config import AppConfig
+from raucous.config import AppConfig
 
 
 class AudioSettingsDialog(QDialog):
@@ -27,7 +27,7 @@ class AudioSettingsDialog(QDialog):
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
-        self.setWindowTitle("VinylPulse audio settings")
+        self.setWindowTitle("Raucous audio settings")
         self.setModal(True)
         self.setMinimumWidth(470)
 

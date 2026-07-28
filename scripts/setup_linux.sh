@@ -12,11 +12,11 @@ python3 -m venv .venv
 
 cat <<'EOF'
 
-VinylPulse's Python environment is installed.
+Raucous's Python environment is installed.
 Ensure your distribution also provides PulseAudio/PipeWire client libraries,
 PortAudio, and Qt Wayland support where applicable.
 
 Activate: source .venv/bin/activate
-Demo:    vinylpulse --demo
-Devices: vinylpulse --list-audio-devices
+Demo:    raucous --demo
+Devices: raucous --list-audio-devices
 EOF

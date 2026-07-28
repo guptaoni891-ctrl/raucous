@@ -1,8 +1,8 @@
 # Arch Linux and Hyprland setup
 
-Arch Linux, Hyprland and PipeWire are a first-class Linux target for VinylPulse.
-The same repository also supports Windows and macOS. On Hyprland, the application
-automatically requests Qt's native Wayland backend and keeps XWayland as a fallback.
+Raucous treats Arch Linux, Hyprland and PipeWire as its primary platform.
+The application automatically requests Qt's native Wayland backend and keeps
+XWayland as a fallback.
 
 ## 1. Install system packages
 
@@ -28,7 +28,7 @@ pactl list short sources
 ```
 
 The source ending in `.monitor` is the desktop-output source used by the live
-visualizer. VinylPulse automatically prefers the monitor belonging to the
+visualizer. Raucous automatically prefers the monitor belonging to the
 current default sink.
 
 ## 3. Install and test
@@ -38,7 +38,7 @@ python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e '.[dev]'
-vinylpulse --demo
+raucous --demo
 ```
 
 The demo proves the Qt rendering and animation work without Spotify login or
@@ -61,15 +61,15 @@ SPOTIPY_REDIRECT_URI=http://127.0.0.1:8888/callback
 Then run:
 
 ```bash
-vinylpulse
+raucous
 ```
 
 ## 5. Select a PipeWire monitor manually
 
 ```bash
-vinylpulse --list-audio-devices
-vinylpulse --create-config
-vinylpulse --print-config-path
+raucous --list-audio-devices
+raucous --create-config
+raucous --print-config-path
 ```
 
 Set a unique substring or the complete monitor name:
@@ -86,7 +86,7 @@ source.
 
 ## Hyprland notes
 
-VinylPulse sets its Wayland desktop application ID to `vinylpulse`. The window
+Raucous sets its Wayland desktop application ID to `raucous`. The window
 is frameless, transparent and draggable using Qt's compositor-controlled system
 move operation.
 
@@ -96,7 +96,7 @@ If Hyprland tiles the widget on your configuration, first run:
 hyprctl clients
 ```
 
-Confirm the reported class is `vinylpulse`, then create a matching floating
+Confirm the reported class is `raucous`, then create a matching floating
 window rule using the syntax supported by your installed Hyprland version.
 Hyprland changes rule syntax occasionally, so the repository does not silently
 edit your personal compositor configuration.
@@ -107,7 +107,7 @@ edit your personal compositor configuration.
 
 ```bash
 sudo pacman -S --needed qt6-wayland
-QT_QPA_PLATFORM=xcb vinylpulse --demo
+QT_QPA_PLATFORM=xcb raucous --demo
 ```
 
 The second command is a temporary XWayland fallback for diagnosis.
@@ -133,13 +133,8 @@ source name in the generated config file.
 Run the demo once with explicit backend selection:
 
 ```bash
-QT_QPA_PLATFORM='wayland;xcb' vinylpulse --demo
+QT_QPA_PLATFORM='wayland;xcb' raucous --demo
 ```
 
 Do not add global NVIDIA or Wayland environment overrides solely for this
 project unless your wider Hyprland setup already requires them.
-
-## Spotify account requirement
-
-Spotify currently requires Premium for Web API Development Mode. Each user
-should create their own Spotify app and Client ID; Demo Mode works without it.

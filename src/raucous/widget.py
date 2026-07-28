@@ -21,18 +21,18 @@ from PyQt6.QtGui import (
 )
 from PyQt6.QtWidgets import QApplication, QDialog, QMenu, QMessageBox, QWidget
 
-from vinylpulse.audio_devices import list_input_devices
-from vinylpulse.audio_worker import AudioWorker
-from vinylpulse.config import (
+from raucous.audio_devices import list_input_devices
+from raucous.audio_worker import AudioWorker
+from raucous.config import (
     AppConfig,
     ConfigError,
     default_config_path,
     save_config,
 )
-from vinylpulse.dialogs import AudioSettingsDialog
-from vinylpulse.models import TrackUpdate
-from vinylpulse.pulse_audio import list_pulse_sources, pulse_tools_available
-from vinylpulse.renderer import (
+from raucous.dialogs import AudioSettingsDialog
+from raucous.models import TrackUpdate
+from raucous.pulse_audio import list_pulse_sources, pulse_tools_available
+from raucous.renderer import (
     DEFAULT_ACCENT,
     create_demo_artwork,
     demo_levels,
@@ -43,10 +43,10 @@ from vinylpulse.renderer import (
     make_record,
     placeholder_record,
 )
-from vinylpulse.settings import SettingsStore
-from vinylpulse.spectrum import smooth_levels
-from vinylpulse.soundcard_audio import list_soundcard_devices
-from vinylpulse.spotify_worker import SpotifyWorker
+from raucous.settings import SettingsStore
+from raucous.spectrum import smooth_levels
+from raucous.soundcard_audio import list_soundcard_devices
+from raucous.spotify_worker import SpotifyWorker
 
 logger = logging.getLogger(__name__)
 
@@ -71,7 +71,7 @@ class VinylWidget(QWidget):
         self._apply_window_flags()
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.setFixedSize(config.window_size, config.window_size)
-        self.setWindowTitle("VinylPulse")
+        self.setWindowTitle("Raucous")
 
         self._record = placeholder_record(config.vinyl_size)
         self._accent = QColor(DEFAULT_ACCENT)
@@ -80,8 +80,8 @@ class VinylWidget(QWidget):
         self._target_levels = np.zeros(config.bar_count, dtype=np.float32)
         self._display_levels = np.zeros(config.bar_count, dtype=np.float32)
         self._spotify_url: str | None = None
-        self._track_label = "VinylPulse"
-        self._status_message = "Starting VinylPulse…"
+        self._track_label = "Raucous"
+        self._status_message = "Starting Raucous…"
         self._audio_device_name: str | None = None
 
         self._drag_offset: QPoint | None = None
@@ -135,7 +135,7 @@ class VinylWidget(QWidget):
         artwork = create_demo_artwork()
         self._record = make_record(artwork, self._config.vinyl_size)
         self._accent = extract_accent(artwork)
-        self._track_label = "Midnight Compile — VinylPulse Demo"
+        self._track_label = "Midnight Compile — Raucous Demo"
         self._status_message = "Demo mode"
         self._is_playing = True
         self.setToolTip(self._tooltip_text())
@@ -401,7 +401,7 @@ class VinylWidget(QWidget):
         QMessageBox.information(
             self,
             "Audio settings saved",
-            "Restart VinylPulse to apply the new audio capture settings.",
+            "Restart Raucous to apply the new audio capture settings.",
         )
 
     @pyqtSlot()

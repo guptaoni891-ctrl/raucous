@@ -11,15 +11,15 @@ from typing import Any
 import numpy as np
 from PyQt6.QtCore import QThread, pyqtSignal
 
-from vinylpulse.audio_backends import backend_order
-from vinylpulse.audio_devices import (
+from raucous.audio_backends import backend_order
+from raucous.audio_devices import (
     AudioDeviceError,
     choose_audio_device,
     list_input_devices,
     system_default_input_index,
 )
-from vinylpulse.config import AppConfig
-from vinylpulse.pulse_audio import (
+from raucous.config import AppConfig
+from raucous.pulse_audio import (
     PulseAudioError,
     build_parec_command,
     choose_pulse_source,
@@ -27,12 +27,12 @@ from vinylpulse.pulse_audio import (
     list_pulse_sources,
     pulse_tools_available,
 )
-from vinylpulse.soundcard_audio import (
+from raucous.soundcard_audio import (
     SoundCardError,
     choose_soundcard_device,
     list_soundcard_devices,
 )
-from vinylpulse.spectrum import calculate_spectrum
+from raucous.spectrum import calculate_spectrum
 
 logger = logging.getLogger(__name__)
 

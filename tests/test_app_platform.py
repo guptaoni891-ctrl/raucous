@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from vinylpulse import app
+from raucous import app
 
 
 def test_configures_wayland_for_hyprland(

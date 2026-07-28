@@ -1,21 +1,21 @@
 <div align="center">
 
-# VinylPulse
+# Raucous
 
 **A cross-platform Spotify now-playing vinyl widget with a live circular audio visualizer.**
 
-[![CI](https://github.com/guptaoni891-ctrl/vinylpulse/actions/workflows/ci.yml/badge.svg)](https://github.com/guptaoni891-ctrl/vinylpulse/actions/workflows/ci.yml)
+[![CI](https://github.com/guptaoni891-ctrl/raucous/actions/workflows/ci.yml/badge.svg)](https://github.com/guptaoni891-ctrl/raucous/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11--3.14-blue)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](#download-and-run)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-![VinylPulse preview](assets/preview.svg)
+![Raucous preview](assets/preview.svg)
 
 </div>
 
 ## Why this project stands out
 
-VinylPulse is a packaged desktop application rather than a single-file visual
+Raucous is a packaged desktop application rather than a single-file visual
 experiment. It demonstrates:
 
 - secure Spotify OAuth using Authorization Code with PKCE
@@ -34,16 +34,16 @@ Open the repository's **Releases** page and download the package for your system
 
 | Platform | Release file | Launch |
 |---|---|---|
-| Windows 10/11 x64 | `VinylPulse-Windows-x64.zip` | Extract and run `VinylPulse.exe` |
-| macOS Apple Silicon | `VinylPulse-macOS-Apple-Silicon.zip` | Extract and open `VinylPulse.app` |
-| macOS Intel | `VinylPulse-macOS-Intel.zip` | Extract and open `VinylPulse.app` |
-| Linux x64 | `VinylPulse-Linux-x64.tar.gz` | Extract and run `VinylPulse/VinylPulse` |
+| Windows 10/11 x64 | `Raucous-Windows-x64.zip` | Extract and run `Raucous.exe` |
+| macOS Apple Silicon | `Raucous-macOS-Apple-Silicon.zip` | Extract and open `Raucous.app` |
+| macOS Intel | `Raucous-macOS-Intel.zip` | Extract and open `Raucous.app` |
+| Linux x64 | `Raucous-Linux-x64.tar.gz` | Extract and run `Raucous/Raucous` |
 
 The release builds bundle Python and the Python dependencies. Users do not need
 to install Python separately. Every release also includes `SHA256SUMS.txt` for
 archive verification.
 
-On first launch, VinylPulse asks for a Spotify **Client ID** or offers Demo Mode.
+On first launch, Raucous asks for a Spotify **Client ID** or offers Demo Mode.
 The Client ID is public application configuration, not a client secret.
 
 ## Demo mode
@@ -52,7 +52,7 @@ Reviewers can launch the full UI without Spotify credentials or audio setup.
 Choose **Demo Mode** in the first-launch dialog, or run from source with:
 
 ```bash
-vinylpulse --demo
+raucous --demo
 ```
 
 Demo mode uses generated artwork and a deterministic synthetic spectrum. It does
@@ -60,7 +60,7 @@ not call Spotify or capture audio.
 
 ## Spotify setup
 
-VinylPulse uses Spotipy's PKCE flow, so each user needs a Spotify application
+Raucous uses Spotipy's PKCE flow, so each user needs a Spotify application
 **Client ID**. Under Spotify's current Development Mode rules, creating and using
 a Web API app requires Spotify Premium. Demo Mode remains available without a
 Spotify account or Client ID.
@@ -72,7 +72,7 @@ Spotify account or Client ID.
    http://127.0.0.1:8888/callback
    ```
 
-3. Launch VinylPulse and paste the Client ID into the setup dialog.
+3. Launch Raucous and paste the Client ID into the setup dialog.
 4. Complete Spotify authorization in the browser.
 
 Using a personal Client ID avoids sharing the five-user allowlist of someone
@@ -91,16 +91,16 @@ SPOTIPY_REDIRECT_URI=http://127.0.0.1:8888/callback
 
 ## Audio visualizer by platform
 
-Spotify's Web API provides track metadata, not raw playback audio. VinylPulse
+Spotify's Web API provides track metadata, not raw playback audio. Raucous
 therefore captures audio locally and processes samples only in memory.
 
 ### Windows
 
-VinylPulse uses the native WASAPI loopback exposed by the `SoundCard` backend.
+Raucous uses the native WASAPI loopback exposed by the `SoundCard` backend.
 It normally selects the active output automatically. If selection fails, run:
 
 ```powershell
-vinylpulse --list-audio-devices
+raucous --list-audio-devices
 ```
 
 Then set `audio_device` to a speaker/loopback name substring. `Stereo Mix` is also
@@ -128,7 +128,7 @@ Automatic mode tries these backends in order:
 2. native PulseAudio capture through `SoundCard`
 3. PortAudio input fallback through `sounddevice`
 
-Arch Linux and Hyprland remain first-class: VinylPulse requests native Wayland
+Arch Linux and Hyprland remain first-class: Raucous requests native Wayland
 with an XWayland fallback and prefers the default PipeWire output monitor.
 
 See [Linux setup](docs/LINUX.md) and the detailed
@@ -143,7 +143,7 @@ py -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -e ".[dev]"
-vinylpulse --demo
+raucous --demo
 ```
 
 Or run:
@@ -159,7 +159,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e '.[dev]'
-vinylpulse --demo
+raucous --demo
 ```
 
 Or run:
@@ -177,7 +177,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e '.[dev]'
-vinylpulse --demo
+raucous --demo
 ```
 
 Arch users can run:
@@ -191,14 +191,14 @@ Arch users can run:
 List every backend's detected devices:
 
 ```bash
-vinylpulse --list-audio-devices
+raucous --list-audio-devices
 ```
 
 Create and locate the JSON config:
 
 ```bash
-vinylpulse --create-config
-vinylpulse --print-config-path
+raucous --create-config
+raucous --print-config-path
 ```
 
 Recommended portable configuration:
@@ -251,12 +251,12 @@ Qt signals carry immutable updates back to the main thread.
 ## CLI
 
 ```text
-vinylpulse --demo
-vinylpulse --list-audio-devices
-vinylpulse --create-config
-vinylpulse --print-config-path
-vinylpulse --config ./config.json
-vinylpulse --debug
+raucous --demo
+raucous --list-audio-devices
+raucous --create-config
+raucous --print-config-path
+raucous --config ./config.json
+raucous --debug
 ```
 
 The downloadable desktop builds are windowed applications. Use a source install
@@ -269,14 +269,14 @@ python -m pip install -e '.[dev]'
 ruff format src tests
 ruff check src tests
 mypy \
-  src/vinylpulse/config.py \
-  src/vinylpulse/pulse_audio.py \
-  src/vinylpulse/soundcard_audio.py \
-  src/vinylpulse/spectrum.py \
-  src/vinylpulse/spotify_parser.py
+  src/raucous/config.py \
+  src/raucous/pulse_audio.py \
+  src/raucous/soundcard_audio.py \
+  src/raucous/spectrum.py \
+  src/raucous/spotify_parser.py
 pytest
 python -m build
-pyinstaller --noconfirm --clean vinylpulse.spec
+pyinstaller --noconfirm --clean raucous.spec
 ```
 
 Or run:
@@ -287,15 +287,15 @@ make check
 
 ## Automated native releases
 
-Pushing a version tag such as `v1.1.0` runs
+Pushing a version tag such as `v1.2.0` runs
 [`.github/workflows/release.yml`](.github/workflows/release.yml). GitHub builds
-VinylPulse independently on Windows, Linux, Apple Silicon macOS and Intel macOS,
+Raucous independently on Windows, Linux, Apple Silicon macOS and Intel macOS,
 then uploads the platform-specific archives to that GitHub Release.
 
 ## Project structure
 
 ```text
-src/vinylpulse/
+src/raucous/
 ├── app.py              # CLI, first-run setup and Qt bootstrap
 ├── audio_devices.py    # PortAudio discovery and selection
 ├── audio_worker.py     # cross-platform capture fallback orchestration
@@ -320,7 +320,7 @@ src/vinylpulse/
 - OAuth tokens remain in the local user cache.
 - Album artwork is used only for display.
 - Audio samples are processed in memory and never recorded or uploaded.
-- VinylPulse is independent and is not affiliated with Spotify.
+- Raucous is independent and is not affiliated with Spotify.
 
 ## Current limitations
 

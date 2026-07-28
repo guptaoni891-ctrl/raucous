@@ -47,11 +47,11 @@ jobs:
       - name: Type check pure modules
         run: >-
           mypy
-          src/vinylpulse/config.py
-          src/vinylpulse/pulse_audio.py
-          src/vinylpulse/soundcard_audio.py
-          src/vinylpulse/spectrum.py
-          src/vinylpulse/spotify_parser.py
+          src/raucous/config.py
+          src/raucous/pulse_audio.py
+          src/raucous/soundcard_audio.py
+          src/raucous/spectrum.py
+          src/raucous/spotify_parser.py
 
       - name: Unit tests
         run: pytest
@@ -83,4 +83,4 @@ jobs:
       - name: Run unit tests
         run: python -m pytest
       - name: Import application modules
-        run: python -c "import vinylpulse.app, vinylpulse.audio_worker, vinylpulse.soundcard_audio"
+        run: python -c "import raucous.app, raucous.audio_worker, raucous.soundcard_audio"

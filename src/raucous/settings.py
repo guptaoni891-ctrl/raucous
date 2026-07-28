@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from PyQt6.QtCore import QPoint, QSettings
 
-from vinylpulse.config import APP_AUTHOR, APP_NAME, AppConfig
+from raucous.config import APP_AUTHOR, APP_NAME, AppConfig
 
 
 class SettingsStore:

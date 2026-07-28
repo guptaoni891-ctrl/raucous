@@ -128,6 +128,6 @@ def build_parec_command(
         f"--rate={sample_rate}",
         f"--channels={channels}",
         "--latency-msec=50",
-        "--client-name=VinylPulse",
-        "--stream-name=VinylPulse visualizer",
+        "--client-name=Raucous",
+        "--stream-name=Raucous visualizer",
     ]

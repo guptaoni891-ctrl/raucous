@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from vinylpulse.audio_backends import backend_order
+from raucous.audio_backends import backend_order
 
 
 def test_linux_auto_prefers_pipewire() -> None:

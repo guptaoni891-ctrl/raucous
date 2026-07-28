@@ -1,6 +1,6 @@
 # Linux setup
 
-VinylPulse supports X11 and Wayland desktops. On Wayland it requests the native
+Raucous supports X11 and Wayland desktops. On Wayland it requests the native
 Qt Wayland backend and keeps XWayland as a fallback.
 
 ## Audio backend order
@@ -44,7 +44,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e '.[dev]'
-vinylpulse --demo
+raucous --demo
 ```
 
 ## Inspect the output monitor
@@ -52,7 +52,7 @@ vinylpulse --demo
 ```bash
 pactl get-default-sink
 pactl list short sources
-vinylpulse --list-audio-devices
+raucous --list-audio-devices
 ```
 
 A desktop-output monitor normally ends in `.monitor`.

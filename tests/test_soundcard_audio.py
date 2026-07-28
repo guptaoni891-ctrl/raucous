@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from vinylpulse.soundcard_audio import (
+from raucous.soundcard_audio import (
     SoundCardDevice,
     SoundCardError,
     choose_soundcard_device,

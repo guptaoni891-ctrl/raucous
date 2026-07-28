@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from vinylpulse.config import AppConfig, ConfigError, load_config, write_default_config
+from raucous.config import AppConfig, ConfigError, load_config, write_default_config
 
 
 def test_defaults_are_valid() -> None:
@@ -49,7 +49,7 @@ def test_rejects_unknown_audio_backend() -> None:
 
 
 def test_save_config_round_trip(tmp_path: Path) -> None:
-    from vinylpulse.config import save_config
+    from raucous.config import save_config
 
     path = tmp_path / "saved" / "config.json"
     save_config(AppConfig(audio_backend="soundcard"), path)

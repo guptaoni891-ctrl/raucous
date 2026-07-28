@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from vinylpulse.audio_devices import AudioDevice, AudioDeviceError, choose_audio_device
+from raucous.audio_devices import AudioDevice, AudioDeviceError, choose_audio_device
 
 
 def device(index: int, name: str, *, loopback: bool = False) -> AudioDevice:

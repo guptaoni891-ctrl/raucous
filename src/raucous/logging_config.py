@@ -6,13 +6,13 @@ from pathlib import Path
 
 from platformdirs import user_log_path
 
-from vinylpulse.config import APP_AUTHOR, APP_NAME
+from raucous.config import APP_AUTHOR, APP_NAME
 
 
 def configure_logging(*, debug: bool) -> Path:
     log_dir = user_log_path(APP_NAME, APP_AUTHOR)
     log_dir.mkdir(parents=True, exist_ok=True)
-    log_path = log_dir / "vinylpulse.log"
+    log_path = log_dir / "raucous.log"
 
     root = logging.getLogger()
     root.setLevel(logging.DEBUG if debug else logging.INFO)

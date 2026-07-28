@@ -188,5 +188,5 @@ def choose_soundcard_device(
         )
     raise SoundCardError(
         "No output monitor/loopback device was found. Run "
-        "'vinylpulse --list-audio-devices' and select one in the config."
+        "'raucous --list-audio-devices' and select one in the config."
     )

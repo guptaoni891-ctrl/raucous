@@ -9,7 +9,7 @@ py -m venv .venv
 & .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 
 Write-Host ""
-Write-Host "VinylPulse is installed."
+Write-Host "Raucous is installed."
 Write-Host "Activate: .venv\Scripts\Activate.ps1"
-Write-Host "Demo:    vinylpulse --demo"
-Write-Host "Devices: vinylpulse --list-audio-devices"
+Write-Host "Demo:    raucous --demo"
+Write-Host "Devices: raucous --list-audio-devices"

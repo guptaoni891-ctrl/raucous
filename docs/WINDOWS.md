@@ -2,16 +2,16 @@
 
 ## Release download
 
-1. Download `VinylPulse-Windows-x64.zip` from GitHub Releases.
+1. Download `Raucous-Windows-x64.zip` from GitHub Releases.
 2. Extract the entire archive.
-3. Run `VinylPulse.exe` from the extracted folder.
+3. Run `Raucous.exe` from the extracted folder.
 4. Enter a Spotify Client ID or choose Demo Mode.
 
 Do not move only the `.exe`; the adjacent bundled files are required.
 
 ## Audio capture
 
-VinylPulse uses Windows WASAPI loopback through the native `SoundCard` backend.
+Raucous uses Windows WASAPI loopback through the native `SoundCard` backend.
 This captures the audio playing through an output device without recording it to
 disk.
 
@@ -19,14 +19,14 @@ Automatic mode prefers the active output. For source installations, inspect the
 devices with:
 
 ```powershell
-vinylpulse --list-audio-devices
+raucous --list-audio-devices
 ```
 
 Then create the config and choose a device by name:
 
 ```powershell
-vinylpulse --create-config
-vinylpulse --print-config-path
+raucous --create-config
+raucous --print-config-path
 ```
 
 ```json
@@ -47,7 +47,7 @@ py -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -e ".[dev]"
-vinylpulse --demo
+raucous --demo
 ```
 
 The included helper automates this:
@@ -66,9 +66,9 @@ choosing **Run anyway**.
 
 ### Visualizer is flat
 
-- Play audio before launching VinylPulse.
-- Confirm Spotify is using the same output device VinylPulse selected.
-- Run `vinylpulse --list-audio-devices` from a source installation.
+- Play audio before launching Raucous.
+- Confirm Spotify is using the same output device Raucous selected.
+- Run `raucous --list-audio-devices` from a source installation.
 - Set `audio_device` to the active speaker name.
 - Update the sound driver if no WASAPI loopback device is exposed.
 

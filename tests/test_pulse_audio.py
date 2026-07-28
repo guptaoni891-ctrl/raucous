@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from vinylpulse.pulse_audio import (
+from raucous.pulse_audio import (
     PulseAudioError,
     PulseSource,
     build_parec_command,

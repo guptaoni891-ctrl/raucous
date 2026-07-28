@@ -23,12 +23,12 @@ python -m pip install -e '.[dev]'
 
 cat <<'EOF'
 
-VinylPulse is installed in .venv.
+Raucous is installed in .venv.
 
 Run the reviewer demo:
   source .venv/bin/activate
-  vinylpulse --demo
+  raucous --demo
 
 List PipeWire monitor sources:
-  vinylpulse --list-audio-devices
+  raucous --list-audio-devices
 EOF

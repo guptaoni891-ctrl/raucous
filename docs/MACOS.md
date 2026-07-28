@@ -2,14 +2,14 @@
 
 ## Choose the correct download
 
-- Apple Silicon Macs: `VinylPulse-macOS-Apple-Silicon.zip`
-- Intel Macs: `VinylPulse-macOS-Intel.zip`
+- Apple Silicon Macs: `Raucous-macOS-Apple-Silicon.zip`
+- Intel Macs: `Raucous-macOS-Intel.zip`
 
-Extract the archive and open `VinylPulse.app`.
+Extract the archive and open `Raucous.app`.
 
 ## First launch and permissions
 
-The first time VinylPulse opens an audio input, macOS can ask for microphone
+The first time Raucous opens an audio input, macOS can ask for microphone
 permission. Allow it in:
 
 **System Settings → Privacy & Security → Microphone**
@@ -32,7 +32,7 @@ After installation:
 1. Open **Audio MIDI Setup**.
 2. Create a Multi-Output Device containing your speakers/headphones and BlackHole.
 3. Select that Multi-Output Device as macOS output.
-4. From a source installation, run `vinylpulse --list-audio-devices`.
+4. From a source installation, run `raucous --list-audio-devices`.
 5. Set `audio_device` to `BlackHole`.
 
 ```json
@@ -53,7 +53,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e '.[dev]'
-vinylpulse --demo
+raucous --demo
 ```
 
 Or:

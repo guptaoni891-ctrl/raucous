@@ -10,18 +10,18 @@ project_root = Path(SPECPATH)
 soundcard_datas, soundcard_binaries, soundcard_hidden = collect_all("soundcard")
 
 if sys.platform == "darwin":
-    executable_icon = str(project_root / "assets" / "vinylpulse.icns")
+    executable_icon = str(project_root / "assets" / "raucous.icns")
 elif sys.platform.startswith("win"):
-    executable_icon = str(project_root / "assets" / "vinylpulse.ico")
+    executable_icon = str(project_root / "assets" / "raucous.ico")
 else:
     executable_icon = None
 
 a = Analysis(
-    [str(project_root / "src" / "vinylpulse" / "__main__.py")],
+    [str(project_root / "src" / "raucous" / "__main__.py")],
     pathex=[str(project_root / "src")],
     binaries=soundcard_binaries,
     datas=soundcard_datas
-    + [(str(project_root / "src" / "vinylpulse" / "assets" / "icon.png"), "vinylpulse/assets")],
+    + [(str(project_root / "src" / "raucous" / "assets" / "icon.png"), "raucous/assets")],
     hiddenimports=soundcard_hidden,
     hookspath=[],
     hooksconfig={},
@@ -37,7 +37,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name="VinylPulse",
+    name="Raucous",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -58,21 +58,21 @@ collection = COLLECT(
     strip=False,
     upx=False,
     upx_exclude=[],
-    name="VinylPulse",
+    name="Raucous",
 )
 
 if sys.platform == "darwin":
     app = BUNDLE(
         collection,
-        name="VinylPulse.app",
-        icon=str(project_root / "assets" / "vinylpulse.icns"),
-        bundle_identifier="dev.anubhavgupta.vinylpulse",
+        name="Raucous.app",
+        icon=str(project_root / "assets" / "raucous.icns"),
+        bundle_identifier="dev.anubhavgupta.raucous",
         info_plist={
-            "CFBundleDisplayName": "VinylPulse",
-            "CFBundleShortVersionString": "1.1.0",
-            "CFBundleVersion": "1.1.0",
+            "CFBundleDisplayName": "Raucous",
+            "CFBundleShortVersionString": "1.2.0",
+            "CFBundleVersion": "1.2.0",
             "NSMicrophoneUsageDescription": (
-                "VinylPulse uses an audio input or virtual loopback device only "
+                "Raucous uses an audio input or virtual loopback device only "
                 "to animate the local visualizer. Audio is never saved or uploaded."
             ),
             "LSMinimumSystemVersion": "12.0",

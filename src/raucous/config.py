@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 from dotenv import load_dotenv
 from platformdirs import user_config_path
 
-APP_NAME = "VinylPulse"
+APP_NAME = "Raucous"
 APP_AUTHOR = "Anubhav Gupta"
 DEFAULT_REDIRECT_URI = "http://127.0.0.1:8888/callback"
 

@@ -1,4 +1,4 @@
-# Publishing VinylPulse to GitHub
+# Publishing Raucous to GitHub
 
 ## 1. Validate locally on Arch/Hyprland
 
@@ -6,8 +6,8 @@
 ./scripts/setup_arch.sh
 source .venv/bin/activate
 make check
-vinylpulse --demo
-vinylpulse --list-audio-devices
+raucous --demo
+raucous --list-audio-devices
 ```
 
 Also launch Spotify, play a track and confirm the PipeWire `.monitor` source is
@@ -18,9 +18,9 @@ selected.
 ```bash
 git init
 git add .
-git commit -m "feat: release cross-platform VinylPulse 1.1"
+git commit -m "feat: release cross-platform Raucous 1.1"
 git branch -M main
-git remote add origin https://github.com/guptaoni891-ctrl/vinylpulse.git
+git remote add origin https://github.com/guptaoni891-ctrl/raucous.git
 git push -u origin main
 ```
 
@@ -52,16 +52,16 @@ Replace the static preview with:
 Commit and push everything, then tag the release:
 
 ```bash
-git tag -a v1.1.0 -m "VinylPulse 1.1.0"
-git push origin v1.1.0
+git tag -a v1.2.0 -m "Raucous 1.2.0"
+git push origin v1.2.0
 ```
 
 The `Build release downloads` workflow creates and uploads:
 
-- `VinylPulse-Windows-x64.zip`
-- `VinylPulse-Linux-x64.tar.gz`
-- `VinylPulse-macOS-Apple-Silicon.zip`
-- `VinylPulse-macOS-Intel.zip`
+- `Raucous-Windows-x64.zip`
+- `Raucous-Linux-x64.tar.gz`
+- `Raucous-macOS-Apple-Silicon.zip`
+- `Raucous-macOS-Intel.zip`
 - `SHA256SUMS.txt`
 
 The workflow creates the GitHub Release automatically when the tag is pushed.

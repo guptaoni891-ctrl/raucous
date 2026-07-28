@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from vinylpulse.geometry import radial_bar_segment
+from raucous.geometry import radial_bar_segment
 
 
 def test_first_bar_points_up() -> None:

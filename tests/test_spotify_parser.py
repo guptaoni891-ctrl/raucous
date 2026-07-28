@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from vinylpulse.spotify_parser import parse_playback
+from raucous.spotify_parser import parse_playback
 
 
 def test_parses_track_payload() -> None:
@@ -31,7 +31,7 @@ def test_parses_episode_payload() -> None:
                 "id": "episode-1",
                 "name": "Building Desktop Apps",
                 "type": "episode",
-                "show": {"publisher": "VinylPulse Labs"},
+                "show": {"publisher": "Raucous Labs"},
                 "images": [{"url": "https://example.test/episode.jpg"}],
                 "external_urls": {},
             },
@@ -39,7 +39,7 @@ def test_parses_episode_payload() -> None:
     )
     assert parsed is not None
     assert parsed.item_type == "episode"
-    assert parsed.artist == "VinylPulse Labs"
+    assert parsed.artist == "Raucous Labs"
     assert parsed.spotify_url is None
 
 

@@ -10,7 +10,7 @@ lint:
 	ruff check src tests
 
 typecheck:
-	mypy src/vinylpulse/config.py src/vinylpulse/pulse_audio.py src/vinylpulse/soundcard_audio.py src/vinylpulse/spectrum.py src/vinylpulse/spotify_parser.py
+	mypy src/raucous/config.py src/raucous/pulse_audio.py src/raucous/soundcard_audio.py src/raucous/spectrum.py src/raucous/spotify_parser.py
 
 test:
 	pytest
@@ -19,7 +19,7 @@ build:
 	python -m build
 
 bundle:
-	pyinstaller --noconfirm --clean vinylpulse.spec
+	pyinstaller --noconfirm --clean raucous.spec
 
 check: lint typecheck test build
 

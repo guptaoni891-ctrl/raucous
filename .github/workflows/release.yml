@@ -18,16 +18,16 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact: VinylPulse-Windows-x64
+            artifact: Raucous-Windows-x64
             kind: windows
           - os: ubuntu-22.04
-            artifact: VinylPulse-Linux-x64
+            artifact: Raucous-Linux-x64
             kind: linux
           - os: macos-15
-            artifact: VinylPulse-macOS-Apple-Silicon
+            artifact: Raucous-macOS-Apple-Silicon
             kind: mac-arm
           - os: macos-15-intel
-            artifact: VinylPulse-macOS-Intel
+            artifact: Raucous-macOS-Intel
             kind: mac-intel
 
     steps:
@@ -56,45 +56,45 @@ jobs:
         run: python -m pytest
 
       - name: Build native application
-        run: pyinstaller --noconfirm --clean vinylpulse.spec
+        run: pyinstaller --noconfirm --clean raucous.spec
 
       - name: Smoke-test Windows bundle
         if: matrix.kind == 'windows'
         shell: pwsh
         env:
           QT_QPA_PLATFORM: offscreen
-        run: '& "dist/VinylPulse/VinylPulse.exe" --smoke-test'
+        run: '& "dist/Raucous/Raucous.exe" --smoke-test'
 
       - name: Smoke-test Linux bundle
         if: matrix.kind == 'linux'
         env:
           QT_QPA_PLATFORM: offscreen
-        run: dist/VinylPulse/VinylPulse --smoke-test
+        run: dist/Raucous/Raucous --smoke-test
 
       - name: Smoke-test macOS bundle
         if: startsWith(matrix.kind, 'mac-')
         env:
           QT_QPA_PLATFORM: offscreen
-        run: dist/VinylPulse.app/Contents/MacOS/VinylPulse --smoke-test
+        run: dist/Raucous.app/Contents/MacOS/Raucous --smoke-test
 
       - name: Package Windows download
         if: matrix.kind == 'windows'
         shell: pwsh
         run: |
-          Copy-Item LICENSE, NOTICE, README.md -Destination dist/VinylPulse
-          Compress-Archive -Path dist/VinylPulse/* -DestinationPath "${{ matrix.artifact }}.zip"
+          Copy-Item LICENSE, NOTICE, README.md -Destination dist/Raucous
+          Compress-Archive -Path dist/Raucous/* -DestinationPath "${{ matrix.artifact }}.zip"
 
       - name: Package Linux download
         if: matrix.kind == 'linux'
         run: |
-          cp LICENSE NOTICE README.md dist/VinylPulse/
-          tar -C dist -czf "${{ matrix.artifact }}.tar.gz" VinylPulse
+          cp LICENSE NOTICE README.md dist/Raucous/
+          tar -C dist -czf "${{ matrix.artifact }}.tar.gz" Raucous
 
       - name: Package macOS download
         if: startsWith(matrix.kind, 'mac-')
         run: |
           mkdir release-package
-          cp -R dist/VinylPulse.app release-package/
+          cp -R dist/Raucous.app release-package/
           cp LICENSE NOTICE README.md release-package/
           ditto -c -k --sequesterRsrc release-package "${{ matrix.artifact }}.zip"
 
@@ -132,12 +132,12 @@ jobs:
       - name: Generate checksums
         run: |
           cd release-downloads
-          sha256sum VinylPulse-* > SHA256SUMS.txt
+          sha256sum Raucous-* > SHA256SUMS.txt
 
       - name: Create or update GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1 || \
-            gh release create "${GITHUB_REF_NAME}" --generate-notes --title "VinylPulse ${GITHUB_REF_NAME#v}"
+            gh release create "${GITHUB_REF_NAME}" --generate-notes --title "Raucous ${GITHUB_REF_NAME#v}"
           gh release upload "${GITHUB_REF_NAME}" release-downloads/* --clobber

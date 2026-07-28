@@ -72,10 +72,8 @@ def list_soundcard_devices(
 
     try:
         microphones = list(soundcard_module.all_microphones(include_loopback=True))
-        physical_inputs = list(
-            soundcard_module.all_microphones(include_loopback=False)
-        )
-    except Exception as exc:  # noqa: BLE001
+        physical_inputs = list(soundcard_module.all_microphones(include_loopback=False))
+    except Exception as exc:
         raise SoundCardError(
             f"Could not enumerate native audio devices: {exc}"
         ) from exc
@@ -147,8 +145,7 @@ def choose_soundcard_device(
         matches = [
             device
             for device in candidates
-            if query in device.name.casefold()
-            or query in device.identifier.casefold()
+            if query in device.name.casefold() or query in device.identifier.casefold()
         ]
         if matches:
             return sorted(

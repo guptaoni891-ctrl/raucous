@@ -6,7 +6,7 @@ from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
-from PyQt6.QtCore import QByteArray, QPoint, QTimer, QUrl, Qt, pyqtSlot
+from PyQt6.QtCore import QByteArray, QPoint, Qt, QTimer, QUrl, pyqtSlot
 from PyQt6.QtGui import (
     QAction,
     QCloseEvent,
@@ -15,8 +15,8 @@ from PyQt6.QtGui import (
     QDesktopServices,
     QKeyEvent,
     QMouseEvent,
-    QPaintEvent,
     QPainter,
+    QPaintEvent,
     QPixmap,
 )
 from PyQt6.QtWidgets import QApplication, QDialog, QMenu, QMessageBox, QWidget
@@ -44,8 +44,8 @@ from raucous.renderer import (
     placeholder_record,
 )
 from raucous.settings import SettingsStore
-from raucous.spectrum import smooth_levels
 from raucous.soundcard_audio import list_soundcard_devices
+from raucous.spectrum import smooth_levels
 from raucous.spotify_worker import SpotifyWorker
 
 logger = logging.getLogger(__name__)
@@ -195,8 +195,7 @@ class VinylWidget(QWidget):
         seconds = self._animation_timer.interval() / 1000.0
         if self._is_playing:
             self._angle = (
-                self._angle
-                + self._config.rotation_speed_degrees_per_second * seconds
+                self._angle + self._config.rotation_speed_degrees_per_second * seconds
             ) % 360.0
 
         if self._config.demo_mode:
@@ -258,8 +257,7 @@ class VinylWidget(QWidget):
             else:
                 self._system_move_active = False
                 self._drag_offset = (
-                    event.globalPosition().toPoint()
-                    - self.frameGeometry().topLeft()
+                    event.globalPosition().toPoint() - self.frameGeometry().topLeft()
                 )
             event.accept()
             return

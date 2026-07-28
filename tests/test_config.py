@@ -58,7 +58,7 @@ def test_save_config_round_trip(tmp_path: Path) -> None:
 
 
 def test_rejects_redirect_hostname_lookalike() -> None:
-    with pytest.raises(ConfigError, match="127.0.0.1"):
+    with pytest.raises(ConfigError, match=r"127\.0\.0\.1"):
         AppConfig.from_mapping(
             {"spotify_redirect_uri": "http://127.0.0.1.example.com/callback"}
         )

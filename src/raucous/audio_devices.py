@@ -85,9 +85,7 @@ def choose_audio_device(
                 matches,
                 key=lambda device: (not device.is_loopback_candidate, device.index),
             )[0]
-        raise AudioDeviceError(
-            f"No audio input device name contains {requested!r}"
-        )
+        raise AudioDeviceError(f"No audio input device name contains {requested!r}")
 
     loopback = [device for device in candidates if device.is_loopback_candidate]
     if loopback:

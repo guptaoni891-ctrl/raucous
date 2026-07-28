@@ -104,7 +104,7 @@ class SpotifyWorker(QThread):
     def run(self) -> None:
         try:
             client = self._build_client()
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             logger.exception("Spotify setup failed")
             self._emit_status_once(f"Spotify setup failed: {exc}")
             return
@@ -166,7 +166,7 @@ class SpotifyWorker(QThread):
                 if self._wait(backoff):
                     break
                 backoff = min(backoff * 2.0, 60.0)
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 logger.exception("Unexpected Spotify worker failure")
                 self._emit_status_once(
                     f"Unexpected Spotify error; retrying in {backoff:.0f}s: {exc}"

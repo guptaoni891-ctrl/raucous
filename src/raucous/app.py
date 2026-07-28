@@ -79,18 +79,17 @@ def _print_audio_devices() -> int:
         if native_devices:
             found_any = True
             print(
-                "NATIVE AUDIO DEVICES "
-                "(Windows WASAPI / macOS CoreAudio / Linux Pulse)"
+                "NATIVE AUDIO DEVICES (Windows WASAPI / macOS CoreAudio / Linux Pulse)"
             )
             print(f"{'INDEX':>5}  {'TYPE':>10}  {'DEFAULT':>9}  NAME")
             for device in native_devices:
                 kind = "loopback" if device.is_loopback else "input"
-                default = "output" if device.is_default_output else (
-                    "input" if device.is_default_input else ""
+                default = (
+                    "output"
+                    if device.is_default_output
+                    else ("input" if device.is_default_input else "")
                 )
-                print(
-                    f"{device.index:>5}  {kind:>10}  {default:>9}  {device.name}"
-                )
+                print(f"{device.index:>5}  {kind:>10}  {default:>9}  {device.name}")
             print()
 
     if sys.platform.startswith("linux") and pulse_tools_available():
@@ -152,12 +151,11 @@ def _install_exception_hook(message_box: object) -> None:
             "Uncaught exception",
             exc_info=(exc_type, exc_value, traceback),
         )
-        critical = getattr(message_box, "critical")
+        critical = message_box.critical
         critical(
             None,
             "Raucous error",
-            "Raucous encountered an unexpected error. Check the log file for "
-            "details.",
+            "Raucous encountered an unexpected error. Check the log file for details.",
         )
 
     sys.excepthook = handle_exception
@@ -262,7 +260,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     _configure_qt_platform()
 
     try:
-        from PyQt6.QtCore import QCoreApplication, QTimer, Qt
+        from PyQt6.QtCore import QCoreApplication, Qt, QTimer
         from PyQt6.QtGui import QGuiApplication, QIcon
         from PyQt6.QtWidgets import QApplication, QInputDialog, QMessageBox
     except ImportError:

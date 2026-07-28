@@ -63,6 +63,6 @@ def smooth_levels(
     coefficients = np.where(target_values > current_values, rise, fall).astype(
         np.float32
     )
-    return (
-        current_values + coefficients * (target_values - current_values)
-    ).astype(np.float32)
+    return (current_values + coefficients * (target_values - current_values)).astype(
+        np.float32
+    )

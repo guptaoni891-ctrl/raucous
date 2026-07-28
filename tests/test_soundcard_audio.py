@@ -88,9 +88,7 @@ class FakeSoundCardModule:
 
     def all_microphones(self, *, include_loopback: bool) -> list[FakeAudioObject]:
         return (
-            [self.microphone, self.loopback]
-            if include_loopback
-            else [self.microphone]
+            [self.microphone, self.loopback] if include_loopback else [self.microphone]
         )
 
     def default_microphone(self) -> FakeAudioObject:

@@ -6,6 +6,7 @@ import subprocess
 import sys
 import threading
 from collections.abc import Callable
+from contextlib import suppress
 from typing import Any
 
 import numpy as np
@@ -88,7 +89,7 @@ class AudioWorker(QThread):
                         f"{backend.title()} audio unavailable; trying "
                         f"{order[position + 1].title()}."
                     )
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 logger.exception("Unexpected %s audio backend failure", backend)
                 errors.append(f"{backend}: {exc}")
 
@@ -262,14 +263,10 @@ class AudioWorker(QThread):
             try:
                 chunks.put_nowait(mono)
             except queue.Full:
-                try:
+                with suppress(queue.Empty):
                     chunks.get_nowait()
-                except queue.Empty:
-                    pass
-                try:
+                with suppress(queue.Full):
                     chunks.put_nowait(mono)
-                except queue.Full:
-                    pass
 
         try:
             with sd.InputStream(

@@ -106,9 +106,11 @@ class AppConfig:
                 "spotify_redirect_uri must use the 127.0.0.1 loopback address"
             )
         try:
-            redirect.port
+            redirect_port = redirect.port
         except ValueError as exc:
             raise ConfigError("spotify_redirect_uri contains an invalid port") from exc
+        if redirect_port is not None and not 1 <= redirect_port <= 65_535:
+            raise ConfigError("spotify_redirect_uri contains an invalid port")
         return self
 
     def with_runtime_flags(self, *, demo_mode: bool, debug: bool) -> AppConfig:

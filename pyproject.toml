@@ -54,7 +54,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "build>=1.2,<2",
-  "mypy>=1.15,<2",
+  "mypy>=1.15,<3",
   "pyinstaller>=6.14,<7",
   "pytest>=8.3,<10",
   "ruff>=0.15.22,<0.16",
